@@ -14,7 +14,7 @@ camera.py starts up active webcam scanning for QR codes. It will read the data a
 admin.exe is a simple executable file, to run it all you need to do is double click on it.
 
 camera.py can be ran by typing "python camera.py" in command prompt while in the file's directory.<br />
-Install any dependency needed be typing "pip install (dependency name)"
+Install any dependency needed by typing "pip install (dependency name)" in any terminal software (ex. command prompt, terminal, etc...)
 
 To retrieve the data you just need the data.json file.<br />
 For use of data within Google Sheets, I reccomend the following plugin for importing the JSON file:<br />
