@@ -44,9 +44,9 @@ def remove_member(name, filename=pathToJSON):
         for i in range(len(file_data["members"])):
             if file_data["members"][i]["name"] == name:
                 del file_data["members"][i]
+                file_data["member-count"] -= 1
                 break
         file.seek(0)
-        file_data["member-count"] -= 1
         updatedJSON = json.dumps(file_data, indent=4)
     with open(filename, 'w') as file:
         file.write(updatedJSON)
@@ -64,13 +64,20 @@ def print_QR_code(data):
 
 while True:
     task = input(
-        "What would you like to do? Type 'add' to add a member, 'delete' to remove a membber, 'get qr' to get a member's QR code, or 'quit' to quit!")
+        "What would you like to do? Type 'add' to add a member, 'delete' to remove a member, 'get qr' to get a member's QR code, or 'quit' to quit!")
     if task == "add":
         name = input("What's the name of the user you'd like to add?")
         gradYear = input("What's the graduating year of the user?")
         if len(gradYear) > 2:
             gradYear[-2:]
-        idnum = int(gradYear + str(read_json()["member-count"]).zfill(2))
+
+        avalID = "00"
+        jsonData = read_json()
+        if len(jsonData["members"]) > 0:
+            lastMemberID = str(
+                jsonData["members"][len(jsonData["members"])-1]["id"])[-2:]
+            avalID = str((int(lastMemberID) + 1)).zfill(2)
+        idnum = int(gradYear + avalID)
         write_json({"id": idnum,
                     "name": name,
                     "days-attended": {

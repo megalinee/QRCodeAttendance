@@ -19,7 +19,7 @@ if not exists(pathToJSON):
     f.write("{\"members\":[],\"member-count\": 0}")
     f.close()
 
-vid = cv2.VideoCapture(0)
+vid = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
 qrDecoder = cv2.QRCodeDetector()
 
