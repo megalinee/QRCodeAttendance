@@ -74,7 +74,7 @@ while(True):
                     font, fontScale, fontColor, thickness, lineType)
         cv2.imshow('poop', recognizedFrame)
 
-    cv2.imshow('frame', frame)
+    cv2.imshow('Live Feed', frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 

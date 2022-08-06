@@ -1,8 +1,11 @@
 import json
 import qrcode
 import io
+from colorama import init
 from os.path import exists
 from datetime import date
+
+init()
 
 pathToJSON = "./data.json"
 
@@ -41,7 +44,7 @@ def print_QR_code(data):
     f = io.StringIO()
     qr.print_ascii(out=f)
     f.seek(0)
-    print(f.read())
+    print('\033[0;30;47m ' + f.read() + ' \033[0;0m')
 
 
 while True:
