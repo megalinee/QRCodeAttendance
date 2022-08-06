@@ -2,19 +2,15 @@
 QR Code Attendance is a Python-based program that allows you to log attendance by showing a QR code to your webcam. It's logged in a generated JSON file.
 
 # Installation
-Go to this link:<br />
-https://github.com/megalinee/QRCodeAttendance/archive/refs/heads/master.zip<br />
-Download the zip file, unzip it, then you're ready to start using the software.
+Download the latest release from this link: <br />
+https://github.com/megalinee/QRCodeAttendance/releases
 
 # Use
-Once downloaded there will be two important files, dist/admin.exe & camera.py.<br />
+Once downloaded there will be two important files, admin.exe & camera.exe.<br />
 admin.exe is used to enter in new members as well as get qr codes for existing members.<br />
-camera.py starts up active webcam scanning for QR codes. It will read the data and automatically log if a member is present or not.
+camera.exe starts up active webcam scanning for QR codes. It will read the data and automatically log if a member is present or not.
 
-admin.exe is a simple executable file, to run it all you need to do is double click on it.
-
-camera.py can be ran by typing "python camera.py" in command prompt while in the file's directory.<br />
-Install any dependency needed by typing "pip install (dependency name)" in any terminal software (ex. command prompt, terminal, etc...)
+**YOU CAN ALSO MAKE YOUR OWN QR CODE, JUST GENERATE IT WITH THE DATA BEING THE USER'S ID.** <br />
 
 To retrieve the data you just need the data.json file.<br />
 For use of data within Google Sheets, I reccomend the following plugin for importing the JSON file:<br />
