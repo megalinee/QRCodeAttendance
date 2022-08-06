@@ -3,9 +3,13 @@ from os.path import exists
 import json
 import cv2
 
+# Change this to the day of general meetings
+GENERAL_DATE = "Friday"
+
 pathToJSON = "./data.json"
 
-dateString = date.today().strftime("%m-%d-%Y")
+dateToday = date.today()
+dateString = dateToday.strftime("%m-%d-%Y")
 
 if not exists(pathToJSON):
     f = open(pathToJSON, "a")
@@ -27,12 +31,18 @@ lastDetected = 0
 
 
 def add_date(filename=pathToJSON):
+    meeting_type = "Extra"
+    if dateToday.strftime("%A") == GENERAL_DATE:
+        meeting_type = "General"
+
     with open(filename, 'r+') as file:
         file_data = json.load(file)
-        for member in file_data["members"]:
-            member["days-attended"][dateString] = False
-        file.seek(0)
-        json.dump(file_data, file, indent=4)
+        if len(file_data["members"]) > 0 and dateString + " " + meeting_type not in file_data["members"][0]["days-attended"]:
+            for member in file_data["members"]:
+                member["days-attended"][dateString +
+                                        " " + meeting_type] = False
+            file.seek(0)
+            json.dump(file_data, file, indent=4)
 
 
 add_date()
