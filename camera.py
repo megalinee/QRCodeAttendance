@@ -10,9 +10,6 @@ pathToJSON = "./data.json"
 
 dateToday = date.today()
 dateString = dateToday.strftime("%m-%d-%Y")
-meeting_type = "Extra"
-if dateToday.strftime("%A") == GENERAL_DATE:
-    meeting_type = "General"
 
 if not exists(pathToJSON):
     f = open(pathToJSON, "a")
@@ -36,10 +33,9 @@ lastDetected = 0
 def add_date(filename=pathToJSON):
     with open(filename, 'r+') as file:
         file_data = json.load(file)
-        if len(file_data["members"]) > 0 and dateString + " " + meeting_type not in file_data["members"][0]["days-attended"]:
+        if len(file_data["members"]) > 0 and dateString not in file_data["members"][0]["days-attended"]:
             for member in file_data["members"]:
-                member["days-attended"][dateString +
-                                        " " + meeting_type] = False
+                member["days-attended"][dateString] = False
             file.seek(0)
             json.dump(file_data, file, indent=4)
 
@@ -54,7 +50,7 @@ def change_attendance(idnum, filename=pathToJSON):
         for member in file_data["members"]:
             if member["id"] == idnum:
                 name = member["name"]
-                member["days-attended"][dateString + " " + meeting_type] = True
+                member["days-attended"][dateString] = True
         file.seek(0)
         updatedJSON = json.dumps(file_data, indent=4)
     with open(filename, 'w') as file:
