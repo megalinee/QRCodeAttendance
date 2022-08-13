@@ -12,6 +12,4 @@ fontColor = (255, 255, 255)
 thickness = 3
 lineType = 2
 
-general_date = "Friday"
-
 pathToJSON = "./data.json"

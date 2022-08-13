@@ -47,9 +47,10 @@ class Camera:
 
     def add_date(self):
         file_data = read_json()
-        if len(file_data["members"]) > 0 and self.date_string not in file_data["members"][0]["days-attended"]:
+        if len(file_data["members"]) > 0:
             for member in file_data["members"]:
-                member["days-attended"][self.date_string] = False
+                if self.date_string not in member["days-attended"]:
+                    member["days-attended"][self.date_string] = False
         write_json(file_data)
 
     def change_user_attendance(self, id_num):
