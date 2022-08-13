@@ -5,7 +5,6 @@ block_cipher = None
 
 
 a = Analysis(['QRCodeAttendance.py'],
-             pathex=['D:\\Code\\Python\\QRCodeSignIn\\src'],
              binaries=[],
              datas=[],
              hiddenimports=[],

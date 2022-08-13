@@ -4,9 +4,10 @@ import json
 import qrcode
 import cv2
 import io
+import os
 import threading
 from datetime import date
-from tkinter import ttk, Listbox, Frame, ANCHOR, Button, Label, END
+from tkinter import ttk, Listbox, Frame, ANCHOR, Button, Label, END, filedialog
 from os.path import exists
 
 
@@ -63,12 +64,12 @@ def parse_nested_json(json_d):
     return result
 
 
-def json_to_csv(json):
+def json_to_csv(json, path):
     json_data = pd.read_json(json)
     json_list = [j[1][0] for j in json_data.iterrows()]
     parsed_list = [parse_nested_json(j) for j in json_list]
     result = pd.DataFrame(parsed_list)
-    result.to_csv("data.csv", index=False)
+    result.to_csv(path, index=False)
 
 
 # Window Generation
@@ -363,7 +364,10 @@ start_camera_button.pack(pady=5)
 
 
 def export_csv():
-    json_to_csv("data.json")
+    path = filedialog.asksaveasfile(filetypes=[(
+        'CSV File', '*.csv')], defaultextension=[(
+            'CSV File', '*.csv')])
+    json_to_csv("data.json", path)
     export_csv_label.config(text="Generated file in this directory!")
 
 
