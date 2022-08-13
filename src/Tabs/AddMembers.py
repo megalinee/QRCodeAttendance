@@ -81,7 +81,7 @@ class AddMembersTab(ttk.Frame):
                                      "days-attended": {
 
                                      }})
-        file_data["member-count"] -= 1
+        file_data["member-count"] += 1
         write_json(file_data)
 
         self.info_display.configure(state='normal')

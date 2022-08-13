@@ -18,7 +18,7 @@ class Main:
         root = tk.Tk()
         root.title('Admin Dashboard')
         root.geometry("598x300")
-        #root.resizable(False, False)
+        root.resizable(False, False)
         root.grid_rowconfigure(1, weight=1)
         root.grid_columnconfigure(0, weight=1)
 
