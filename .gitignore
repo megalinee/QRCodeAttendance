@@ -1,4 +1,5 @@
 data.json
-.zip
+*.zip
 Output
 dist
+IDcard
