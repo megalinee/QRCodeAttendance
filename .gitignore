@@ -3,3 +3,6 @@ data.json
 Output
 dist
 IDcard
+build
+__pycache__
+*.iss
