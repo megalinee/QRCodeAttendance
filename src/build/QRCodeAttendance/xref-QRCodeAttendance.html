@@ -15,7 +15,7 @@
 
 <div class="node">
   <a name="QRCodeAttendance.py"></a>
-  <a target="code" href="///D:/Code/Python/QRCodeSignIn/src/QRCodeAttendance.py" type="text/plain"><tt>QRCodeAttendance.py</tt></a>
+  <a target="code" href="///D:/Code/Python/QRCodeAttendanceVector/src/QRCodeAttendance.py" type="text/plain"><tt>QRCodeAttendance.py</tt></a>
 <span class="moduletype">Script</span>  <div class="import">
 imports:
     <a href="#_bootlocale">_bootlocale</a>
@@ -160,6 +160,7 @@ imports:
  &#8226;   <a href="#locale">locale</a>
  &#8226;   <a href="#ntpath">ntpath</a>
  &#8226;   <a href="#operator">operator</a>
+ &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#pandas">pandas</a>
  &#8226;   <a href="#pyi_rth__tkinter.py">pyi_rth__tkinter.py</a>
  &#8226;   <a href="#pyi_rth_inspect.py">pyi_rth_inspect.py</a>
@@ -175,6 +176,7 @@ imports:
  &#8226;   <a href="#sre_parse">sre_parse</a>
  &#8226;   <a href="#threading">threading</a>
  &#8226;   <a href="#tkinter">tkinter</a>
+ &#8226;   <a href="#tkinter.filedialog">tkinter.filedialog</a>
  &#8226;   <a href="#tkinter.ttk">tkinter.ttk</a>
  &#8226;   <a href="#traceback">traceback</a>
  &#8226;   <a href="#types">types</a>
@@ -832,6 +834,7 @@ imported by:
 imports:
     <a href="#PIL">PIL</a>
  &#8226;   <a href="#PIL.BmpImagePlugin">PIL.BmpImagePlugin</a>
+ &#8226;   <a href="#PIL.FitsImagePlugin">PIL.FitsImagePlugin</a>
  &#8226;   <a href="#PIL.GifImagePlugin">PIL.GifImagePlugin</a>
  &#8226;   <a href="#PIL.GimpGradientFile">PIL.GimpGradientFile</a>
  &#8226;   <a href="#PIL.GimpPaletteFile">PIL.GimpPaletteFile</a>
@@ -851,6 +854,7 @@ imports:
  &#8226;   <a href="#PIL.ImageSequence">PIL.ImageSequence</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
  &#8226;   <a href="#PIL.ImageTk">PIL.ImageTk</a>
+ &#8226;   <a href="#PIL.Jpeg2KImagePlugin">PIL.Jpeg2KImagePlugin</a>
  &#8226;   <a href="#PIL.JpegImagePlugin">PIL.JpegImagePlugin</a>
  &#8226;   <a href="#PIL.PaletteFile">PIL.PaletteFile</a>
  &#8226;   <a href="#PIL.PdfParser">PIL.PdfParser</a>
@@ -1127,7 +1131,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#PIL.FitsStubImagePlugin">PIL.FitsStubImagePlugin</a>
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.FitsStubImagePlugin">PIL.FitsStubImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
 
   </div>
@@ -2013,7 +2018,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#PIL.IcnsImagePlugin">PIL.IcnsImagePlugin</a>
+    <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.IcnsImagePlugin">PIL.IcnsImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
 
   </div>
@@ -29423,6 +29429,7 @@ imported by:
  &#8226;   <a href="#PyInstaller.utils.osx">PyInstaller.utils.osx</a>
  &#8226;   <a href="#PyInstaller.utils.win32.winmanifest">PyInstaller.utils.win32.winmanifest</a>
  &#8226;   <a href="#PyInstaller.utils.win32.winutils">PyInstaller.utils.win32.winutils</a>
+ &#8226;   <a href="#QRCodeAttendance.py">QRCodeAttendance.py</a>
  &#8226;   <a href="#_bootsubprocess">_bootsubprocess</a>
  &#8226;   <a href="#_distutils_hack">_distutils_hack</a>
  &#8226;   <a href="#_osx_support">_osx_support</a>
@@ -41536,7 +41543,6 @@ imports:
  &#8226;   <a href="#pkg_resources._vendor.packaging">pkg_resources._vendor.packaging</a>
  &#8226;   <a href="#pkg_resources._vendor.packaging.__about__">pkg_resources._vendor.packaging.__about__</a>
  &#8226;   <a href="#pkg_resources._vendor.packaging._manylinux">pkg_resources._vendor.packaging._manylinux</a>
- &#8226;   <a href="#pkg_resources._vendor.packaging._musllinux">pkg_resources._vendor.packaging._musllinux</a>
 
   </div>
   <div class="import">
@@ -41624,7 +41630,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#pkg_resources">pkg_resources</a>
- &#8226;   <a href="#pkg_resources._vendor.packaging">pkg_resources._vendor.packaging</a>
  &#8226;   <a href="#pkg_resources._vendor.packaging.tags">pkg_resources._vendor.packaging.tags</a>
 
   </div>
@@ -55699,6 +55704,7 @@ imports:
  &#8226;   <a href="#sys">sys</a>
  &#8226;   <a href="#tkinter.commondialog">tkinter.commondialog</a>
  &#8226;   <a href="#tkinter.constants">tkinter.constants</a>
+ &#8226;   <a href="#tkinter.filedialog">tkinter.filedialog</a>
  &#8226;   <a href="#tkinter.messagebox">tkinter.messagebox</a>
  &#8226;   <a href="#tkinter.ttk">tkinter.ttk</a>
  &#8226;   <a href="#traceback">traceback</a>
@@ -55790,7 +55796,9 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#matplotlib.backends._backend_tk">matplotlib.backends._backend_tk</a>
+    <a href="#QRCodeAttendance.py">QRCodeAttendance.py</a>
+ &#8226;   <a href="#matplotlib.backends._backend_tk">matplotlib.backends._backend_tk</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
 
   </div>
 
