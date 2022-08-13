@@ -4,7 +4,8 @@
 block_cipher = None
 
 
-a = Analysis(['QRCodeAttendance.py'],
+a = Analysis(['Main.py'],
+             pathex=[],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -40,4 +41,4 @@ coll = COLLECT(exe,
                strip=False,
                upx=True,
                upx_exclude=[],
-               name='QRCodeAttendance')
+               name='Main')
