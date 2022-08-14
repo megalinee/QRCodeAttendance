@@ -10,3 +10,7 @@ After installing there will be 3 different tabs.<br />
 Manage Members is used to look up member's information<br />
 Add Members is used to add new members<br />
 Other is used to start up the camera scanner and used to export a csv file.
+
+When the camera is shown the user's QR code it automatically logs them for that day.
+
+Everything is saved in a data.json file found in your app data folder.
