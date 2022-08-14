@@ -1,5 +1,8 @@
 import cv2
 
+window_x = 598
+window_y = 300
+
 # Color Settings
 primary_color = "orange"
 secondary_color = "black"
@@ -15,3 +18,4 @@ lineType = 2
 general_date = "Friday"
 
 pathToJSON = "./data.json"
+defaultJSON = "{\"members\":[],\"member-count\": 0}"

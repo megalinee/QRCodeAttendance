@@ -1,6 +1,13 @@
 import json
+import shutil
 import pandas as pd
 import Constants as CONSTANT
+
+
+def create_json(data, filename=CONSTANT.pathToJSON):
+    f = open(filename, "w")
+    f.write(data)
+    f.close()
 
 
 def read_json(filename=CONSTANT.pathToJSON):
@@ -30,3 +37,7 @@ def json_to_csv(json, path):
     parsed_list = [parse_nested_json(j) for j in json_list]
     result = pd.DataFrame(parsed_list)
     result.to_csv(path, index=False)
+
+
+def duplicate_json(path):
+    path.write(json.dumps(read_json()))
