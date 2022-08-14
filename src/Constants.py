@@ -1,5 +1,8 @@
 import cv2
 
+window_x = 598
+window_y = 300
+
 # Color Settings
 primary_color = "#ff5e5e"
 secondary_color = "black"
@@ -13,3 +16,4 @@ thickness = 3
 lineType = 2
 
 pathToJSON = "./data.json"
+defaultJSON = "{\"members\":[],\"member-count\": 0}"
