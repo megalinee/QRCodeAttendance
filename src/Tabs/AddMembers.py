@@ -72,7 +72,7 @@ class AddMembersTab(ttk.Frame):
         file_data["member-count"] += 1
         write_json(file_data)
 
-        generate_ID_card(full_name, idnum)
+        generate_ID_card(full_name, student_id)
 
         # Update info boxes
         self.info_display.configure(state='normal')
