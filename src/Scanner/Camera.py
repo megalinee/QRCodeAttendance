@@ -1,5 +1,6 @@
 import cv2
 import Constants as CONSTANT
+from pyzbar.pyzbar import decode
 from Tools.JSONTools import read_json, write_json
 from datetime import date
 from ast import Constant
@@ -7,7 +8,6 @@ from ast import Constant
 
 class Camera:
     def __init__(self):
-        self.qr_decoder = cv2.QRCodeDetector()
         self.vid = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
         dateToday = date.today()
@@ -23,10 +23,11 @@ class Camera:
             ret, frame = self.vid.read()
 
             msg = ""
-            data, points, _ = self.qr_decoder.detectAndDecode(frame)
-            if data and lastDetected > 50:
+            detectedBarcodes = decode(frame)
+            if detectedBarcodes and lastDetected > 50:
+                barcode = detectedBarcodes[0]
                 lastDetected = 0
-                value = int(data)
+                value = int(barcode.data)
                 user = self.change_user_attendance(value)
                 if user is not None:
                     msg = "Welcome " + user + "!"
