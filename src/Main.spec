@@ -1,5 +1,10 @@
 # -*- mode: python ; coding: utf-8 -*-
+import os
+import sys
 
+from pathlib import Path
+from pylibdmtx import pylibdmtx
+from pyzbar import pyzbar
 
 block_cipher = None
 
@@ -17,6 +22,12 @@ a = Analysis(['Main.py'],
              win_private_assemblies=False,
              cipher=block_cipher,
              noarchive=False)
+
+a.binaries += TOC([
+    (Path(dep._name).name, dep._name, 'BINARY')
+    for dep in pylibdmtx.EXTERNAL_DEPENDENCIES + pyzbar.EXTERNAL_DEPENDENCIES
+])
+
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 

@@ -35,14 +35,14 @@ class AddMembersTab(ttk.Frame):
         name_entry.pack()
         name_entry.focus()
 
-        year_label = Label(self.ctr_left, text="Graduating Year\n(ex. 2023)")
-        year_label.pack(pady=(20, 5))
+        student_id_label = Label(self.ctr_left, text="Student ID")
+        student_id_label.pack(pady=(20, 5))
 
-        self.graduating_year_var = tk.StringVar()
-        year_entry = ttk.Entry(
-            self.ctr_left, textvariable=self.graduating_year_var)
-        year_entry.pack()
-        year_entry.focus()
+        self.student_id_var = tk.StringVar()
+        student_id_entry = ttk.Entry(
+            self.ctr_left, textvariable=self.student_id_var)
+        student_id_entry.pack()
+        student_id_entry.focus()
 
         submit_button = Button(
             self.ctr_left, text='Submit', command=self.submit_user)
@@ -60,27 +60,15 @@ class AddMembersTab(ttk.Frame):
     def submit_user(self):
         # Get Full Name and Graduating Year
         full_name = str(self.full_name_var.get())
-        graduating_year = str(self.graduating_year_var.get())
-
-        # Generate ID
-        file_data = read_json()
-        if len(graduating_year) > 2:
-            graduating_year = graduating_year[-2:]
-
-        avalID = "00"
-        if len(file_data["members"]) > 0:
-            lastMemberID = str(
-                file_data["members"][len(file_data["members"])-1]["id"])[-2:]
-            avalID = str((int(lastMemberID) + 1)).zfill(2)
-        idnum = int(graduating_year + avalID)
+        student_id = str(self.student_id_var.get())
 
         # Update JSON
         file_data = read_json()
-        file_data["members"].append({"id": idnum,
+        file_data["members"].append({"id": int(student_id),
                                     "name": full_name,
                                      "days-attended": {
 
-                                     }})
+        }})
         file_data["member-count"] += 1
         write_json(file_data)
 
@@ -93,8 +81,8 @@ class AddMembersTab(ttk.Frame):
         self.qr_display.delete('1.0', END)
 
         self.info_display.insert(tk.END, "Successfully added!\nName:\n" + full_name +
-                                 "\nID:\n" + str(idnum))
-        self.qr_display.insert(tk.END, text_QR_code(idnum))
+                                 "\nID:\n" + student_id)
+        self.qr_display.insert(tk.END, text_QR_code(int(student_id)))
 
         self.info_display.configure(state='disable')
         self.qr_display.configure(state='disable')
