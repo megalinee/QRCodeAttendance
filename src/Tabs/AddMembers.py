@@ -64,8 +64,8 @@ class AddMembersTab(ttk.Frame):
 
         # Update JSON
         file_data = read_json()
-        file_data["members"].append({"id": int(student_id),
-                                    "name": full_name,
+        file_data["members"].append({"ID": int(student_id),
+                                    "Name": full_name,
                                      "days-attended": {
 
         }})
