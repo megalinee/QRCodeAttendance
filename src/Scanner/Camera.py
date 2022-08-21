@@ -39,10 +39,6 @@ class Camera:
                 else:
                     msg = "Invalid User ID: " + str(value)
                 recognizedFrame = frame.copy()
-                x, y, w, h = barcode.rect.left, barcode.rect.top, \
-                    barcode.rect.width, barcode.rect.height
-                cv2.rectangle(recognizedFrame, (x, y),
-                              (x+w, y+h), CONSTANT.primary_color, 8)
                 cv2.putText(recognizedFrame, msg, CONSTANT.bottomLeftCornerOfText,
                             CONSTANT.font, CONSTANT.fontScale, CONSTANT.fontColor, CONSTANT.thickness, CONSTANT.lineType)
                 cv2.imshow('poop', recognizedFrame)
@@ -68,8 +64,8 @@ class Camera:
         name = None
         file_data = read_json()
         for member in file_data["members"]:
-            if member["id"] == id_num:
-                name = member["name"]
+            if member["ID"] == id_num:
+                name = member["Name"]
                 member["days-attended"][self.full_date] = True
         write_json(file_data)
         return name

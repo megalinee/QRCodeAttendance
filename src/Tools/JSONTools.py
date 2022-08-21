@@ -36,7 +36,7 @@ def json_to_csv(json, path):
     json_list = [j[1][0] for j in json_data.iterrows()]
     parsed_list = [parse_nested_json(j) for j in json_list]
     result = pd.DataFrame(parsed_list)
-    result.to_csv(path, index=False)
+    result.to_csv(path, index=False, line_terminator='\n')
 
 
 def duplicate_json(path):

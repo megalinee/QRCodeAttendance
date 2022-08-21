@@ -49,7 +49,7 @@ class ManageMembersTab(ttk.Frame):
     def select_user(self):
         file_data = read_json()
         for i in range(len(file_data["members"])):
-            if file_data["members"][i]["name"] == self.member_list.get(ANCHOR):
+            if file_data["members"][i]["Name"] == self.member_list.get(ANCHOR):
                 user = file_data["members"][i]
                 self.info_display.configure(state='normal')
                 self.info_display.delete('1.0', END)
@@ -58,10 +58,10 @@ class ManageMembersTab(ttk.Frame):
 
                 # Display ID
                 self.info_display.insert(END, "ID:\n" +
-                                         str(user["id"]))
+                                         str(user["ID"]))
 
                 # Display QR code
-                self.qr_display.insert(END, text_QR_code(user["id"]))
+                self.qr_display.insert(END, text_QR_code(user["ID"]))
 
                 # Display Days attended
                 self.info_display.insert(END, "\nDays Attended:")
@@ -76,7 +76,7 @@ class ManageMembersTab(ttk.Frame):
     def remove_user(self):
         file_data = read_json()
         for i in range(len(file_data["members"])):
-            if file_data["members"][i]["name"] == self.member_list.get(ANCHOR):
+            if file_data["members"][i]["Name"] == self.member_list.get(ANCHOR):
                 del file_data["members"][i]
                 file_data["member-count"] -= 1
                 break
@@ -88,6 +88,6 @@ class ManageMembersTab(ttk.Frame):
         self.member_list.delete(0, END)
         unsorted_member_list = []
         for i in range(len(file_data["members"])):
-            unsorted_member_list.append(file_data["members"][i]["name"])
+            unsorted_member_list.append(file_data["members"][i]["Name"])
         sorted_member_list = sorted(unsorted_member_list, key=str.lower)
         self.member_list.insert(END, *sorted_member_list)
