@@ -23,7 +23,10 @@ class Camera:
             ret, frame = self.vid.read()
 
             msg = ""
-            detectedBarcodes = decode(frame)
+
+            processedImage = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+            detectedBarcodes = decode(processedImage)
             if detectedBarcodes and lastDetected > 50:
                 barcode = detectedBarcodes[0]
                 lastDetected = 0
