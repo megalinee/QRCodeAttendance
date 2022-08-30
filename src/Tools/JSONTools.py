@@ -1,5 +1,4 @@
 import json
-import shutil
 import pandas as pd
 import Constants as CONSTANT
 
