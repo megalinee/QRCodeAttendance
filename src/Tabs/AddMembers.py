@@ -41,6 +41,7 @@ class AddMembersTab(ttk.Frame):
         self.student_id_var = tk.StringVar()
         student_id_entry = ttk.Entry(
             self.ctr_left, textvariable=self.student_id_var)
+        student_id_entry.bind("<Return>", self.submit_user)
         student_id_entry.pack()
         student_id_entry.focus()
 
@@ -57,7 +58,7 @@ class AddMembersTab(ttk.Frame):
         self.info_display.insert(tk.END, "")
         self.info_display.configure(state='disable')
 
-    def submit_user(self):
+    def submit_user(self, event=None):
         # Get Full Name and Graduating Year
         full_name = str(self.full_name_var.get())
         student_id = str(self.student_id_var.get())
