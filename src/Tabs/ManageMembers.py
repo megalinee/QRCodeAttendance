@@ -26,6 +26,7 @@ class ManageMembersTab(ttk.Frame):
 
     def generate_UI_components(self):
         self.member_list = Listbox(self.ctr_left)
+        self.member_list.bind('<Double-1>', self.select_user)
         self.member_list.pack(pady=15, padx=1)
         self.reload_member_list()
 
@@ -46,7 +47,7 @@ class ManageMembersTab(ttk.Frame):
             self.ctr_left, text='Delete', command=self.remove_user)
         delete_button.pack(pady=5)
 
-    def select_user(self):
+    def select_user(self, event=None):
         file_data = read_json()
         for i in range(len(file_data["members"])):
             if file_data["members"][i]["Name"] == self.member_list.get(ANCHOR):
