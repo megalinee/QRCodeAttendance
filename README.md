@@ -3,7 +3,7 @@ QR Code Attendance is a Python-based program that allows you to log attendance b
 
 # Installation
 Download the latest release from this link: <br />
-https://github.com/megalinee/QRCodeAttendance/releases
+https://github.com/FRC-Team-Vector-8177/QRCodeAttendance/releases/
 
 # Use
 After installing there will be 3 different tabs.<br />
