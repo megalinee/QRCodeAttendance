@@ -6,9 +6,8 @@ from Tools.JSONTools import read_json, write_json
 
 
 class AddMembersTab(ttk.Frame):
-    def __init__(self, parent, reload_member_list):
+    def __init__(self, parent):
         super().__init__(parent)
-        self.reload_member_list = reload_member_list
 
         center = Frame(self, bg='black', width=100, height=200)
 
@@ -84,5 +83,3 @@ class AddMembersTab(ttk.Frame):
 
         self.info_display.configure(state='disable')
         self.qr_display.configure(state='disable')
-
-        self.reload_member_list()
