@@ -6,3 +6,4 @@ IDcard
 build
 __pycache__
 *.iss
+venv
