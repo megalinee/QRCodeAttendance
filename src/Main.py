@@ -23,8 +23,8 @@ class Main:
 
         manage_members = ManageMembersTab(tab_control)
         add_members = AddMembersTab(
-            tab_control, manage_members.reload_member_list)
-        other = OtherTab(tab_control, manage_members.reload_member_list)
+            tab_control)
+        other = OtherTab(tab_control)
 
         tab_control.add(manage_members, text='Manage Members')
         tab_control.add(add_members, text='Add Members')
