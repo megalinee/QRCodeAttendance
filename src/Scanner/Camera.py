@@ -1,3 +1,4 @@
+from datetime import datetime
 import cv2
 import Constants as CONSTANT
 from pyzbar.pyzbar import decode
@@ -9,6 +10,8 @@ class Camera:
     def __init__(self):
         self.vid = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
+        self.signins = {}
+        
         dateToday = date.today()
         self.date_string = dateToday.strftime("%m-%d-%Y")
 
@@ -51,6 +54,7 @@ class Camera:
 
             if cv2.getWindowProperty('Live Feed', cv2.WND_PROP_VISIBLE) < 1:
                 break
+        self.log_all_attendance()
         self.vid.release()
         cv2.destroyAllWindows()
 
@@ -60,15 +64,29 @@ class Camera:
         if len(file_data["members"]) > 0:
             for member in file_data["members"]:
                 if self.full_date not in member["days-attended"]:
-                    member["days-attended"][self.full_date] = False
+                    member["days-attended"][self.full_date] = 0
         write_json(file_data)
 
     def change_user_attendance(self, id_num):
-        name = None
         file_data = read_json()
         for member in file_data["members"]:
             if member["ID"] == id_num:
                 name = member["Name"]
-                member["days-attended"][self.full_date] = True
-        write_json(file_data)
+                if id_num in self.signins:
+                    self.signins[id_num].append(datetime.now())
+                else:
+                    self.signins[id_num] = [datetime.now()]
         return name
+
+    def log_all_attendance(self):
+        file_data = read_json()
+        for member in file_data["members"]:
+            if member["ID"] in self.signins:
+                lastTime = datetime.now()
+                if(len(self.signins[member["ID"]]) > 1):
+                    self.signins[member["ID"]][len(self.signins[member["ID"]])-1]
+                duration = lastTime - self.signins[member["ID"]][0]
+                duration_in_s = duration.total_seconds()  
+                minutes = divmod(duration_in_s, 60)[0]
+                member["days-attended"][] = minutes
+        write_json(file_data)

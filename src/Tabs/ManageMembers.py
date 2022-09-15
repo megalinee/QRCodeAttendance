@@ -69,8 +69,8 @@ class ManageMembersTab(ttk.Frame):
                 # Display Days attended
                 self.info_display.insert(END, "\nDays Attended:")
                 for day in user["days-attended"]:
-                    if user["days-attended"][day] == True:
-                        self.info_display.insert(END, "\n" + day)
+                    if user["days-attended"][day] != 0:
+                        self.info_display.insert(END, "\n" + day + " " + str(int(user["days-attended"][day])) + " mins.")
 
                 self.info_display.configure(state='disable')
                 self.qr_display.configure(state='disable')
