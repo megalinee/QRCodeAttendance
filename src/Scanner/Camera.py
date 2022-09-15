@@ -15,6 +15,12 @@ class Camera:
         dateToday = date.today()
         self.date_string = dateToday.strftime("%m-%d-%Y")
 
+        self.meeting_type = "Extra"
+        if dateToday.strftime("%A") == CONSTANT.general_date:
+            self.meeting_type = "General"
+
+        self.full_date = self.date_string + " " + self.meeting_type
+
         self.add_date()
 
     def start(self):
@@ -54,10 +60,11 @@ class Camera:
 
     def add_date(self):
         file_data = read_json()
+
         if len(file_data["members"]) > 0:
             for member in file_data["members"]:
-                if self.date_string not in member["days-attended"]:
-                    member["days-attended"][self.date_string] = 0
+                if self.full_date not in member["days-attended"]:
+                    member["days-attended"][self.full_date] = 0
         write_json(file_data)
 
     def change_user_attendance(self, id_num):
@@ -81,5 +88,5 @@ class Camera:
                 duration = lastTime - self.signins[member["ID"]][0]
                 duration_in_s = duration.total_seconds()  
                 minutes = divmod(duration_in_s, 60)[0]
-                member["days-attended"][self.date_string] = minutes
+                member["days-attended"][] = minutes
         write_json(file_data)
