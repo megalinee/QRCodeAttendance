@@ -67,10 +67,14 @@ class ManageMembersTab(ttk.Frame):
                 self.qr_display.insert(END, text_QR_code(user["ID"]))
 
                 # Display Days attended
-                self.info_display.insert(END, "\nDays Attended:")
+                self.info_display.insert(END, "\nDays Attended:\n")
+                attended = False;
                 for day in user["days-attended"]:
                     if user["days-attended"][day] != 0:
-                        self.info_display.insert(END, "\n" + day + " " + str(int(user["days-attended"][day])) + " mins.")
+                        attended = True
+                        self.info_display.insert(END, "----------\n" + day + "\n" + str(int(user["days-attended"][day])) + " min\n")
+                if attended:
+                    self.info_display.insert(END, "----------")
 
                 self.info_display.configure(state='disable')
                 self.qr_display.configure(state='disable')
