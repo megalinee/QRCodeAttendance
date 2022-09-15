@@ -19,7 +19,7 @@ class Camera:
         if dateToday.strftime("%A") == CONSTANT.general_date:
             self.meeting_type = "General"
 
-        self.full_date = self.date_string + " " + self.meeting_type
+        self.date_string = self.date_string + " " + self.meeting_type
 
         self.add_date()
 
@@ -63,8 +63,8 @@ class Camera:
 
         if len(file_data["members"]) > 0:
             for member in file_data["members"]:
-                if self.full_date not in member["days-attended"]:
-                    member["days-attended"][self.full_date] = 0
+                if self.date_string not in member["days-attended"]:
+                    member["days-attended"][self.date_string] = 0
         write_json(file_data)
 
     def change_user_attendance(self, id_num):
@@ -88,5 +88,5 @@ class Camera:
                 duration = lastTime - self.signins[member["ID"]][0]
                 duration_in_s = duration.total_seconds()  
                 minutes = divmod(duration_in_s, 60)[0]
-                member["days-attended"][] = minutes
+                member["days-attended"][self.date_string] = minutes
         write_json(file_data)
