@@ -5,6 +5,7 @@ import Constants as CONSTANT
 from tkinter import ttk, Button, Label, filedialog, messagebox, Frame, CENTER
 from Tools.JSONTools import read_json, write_json, json_to_csv, duplicate_json, create_json
 import os
+from Tools.QRTools import generate_ID_card
 from Scanner.Camera import Camera
 
 
@@ -82,7 +83,10 @@ class OtherTab(ttk.Frame):
                 'JSON File', '*.json')], defaultextension=[(
                     'JSON File', '*.json')])
             if path != '':
-                write_json(read_json(filename=path))
+                newjson = read_json(filename=path)
+                write_json(newjson)
+                for member in newjson["members"]:
+                    generate_ID_card(member["Name"], member["ID"])
                 self.status_label.config(
                     text="Imported JSON file!")
 

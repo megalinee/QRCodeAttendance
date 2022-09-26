@@ -11,7 +11,7 @@ class Camera:
         self.vid = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
         self.signins = {}
-        
+
         dateToday = date.today()
         self.date_string = dateToday.strftime("%m-%d-%Y")
 
@@ -83,10 +83,11 @@ class Camera:
         for member in file_data["members"]:
             if member["ID"] in self.signins:
                 lastTime = datetime.now()
-                if(len(self.signins[member["ID"]]) > 1):
-                    self.signins[member["ID"]][len(self.signins[member["ID"]])-1]
+                if (len(self.signins[member["ID"]]) > 1):
+                    self.signins[member["ID"]][len(
+                        self.signins[member["ID"]])-1]
                 duration = lastTime - self.signins[member["ID"]][0]
-                duration_in_s = duration.total_seconds()  
+                duration_in_s = duration.total_seconds()
                 minutes = divmod(duration_in_s, 60)[0]
                 member["days-attended"][self.date_string] = minutes
         write_json(file_data)
