@@ -69,6 +69,7 @@ class Camera:
 
     def change_user_attendance(self, id_num):
         file_data = read_json()
+        name = None
         for member in file_data["members"]:
             if member["ID"] == id_num:
                 name = member["Name"]
