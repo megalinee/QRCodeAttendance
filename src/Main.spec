@@ -11,7 +11,7 @@ block_cipher = None
 
 a = Analysis(['Main.py'],
              pathex=[],
-             binaries=[],
+             binaries=[('./Tools/cardsrc/cardBG.png', '.'), ('./Tools/cardsrc/Montserrat.ttf', '.')],
              datas=[],
              hiddenimports=[],
              hookspath=[],

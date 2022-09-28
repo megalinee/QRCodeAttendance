@@ -4,7 +4,7 @@ window_x = 598
 window_y = 300
 
 # Color Settings
-primary_color = "#ff5e5e"
+primary_color = "orange"
 secondary_color = "black"
 
 # Camera Text Overlay Settings
@@ -14,6 +14,8 @@ fontScale = 1
 fontColor = (255, 255, 255)
 thickness = 3
 lineType = 2
+
+general_date = "Friday"
 
 pathToJSON = "./data.json"
 defaultJSON = "{\"members\":[],\"member-count\": 0}"

@@ -15,6 +15,12 @@ class Camera:
         dateToday = date.today()
         self.date_string = dateToday.strftime("%m-%d-%Y")
 
+        self.meeting_type = "Extra"
+        if dateToday.strftime("%A") == CONSTANT.general_date:
+            self.meeting_type = "General"
+
+        self.date_string = self.date_string + " " + self.meeting_type
+
         self.add_date()
 
     def start(self):
@@ -55,6 +61,7 @@ class Camera:
 
     def add_date(self):
         file_data = read_json()
+
         if len(file_data["members"]) > 0:
             for member in file_data["members"]:
                 if self.date_string not in member["days-attended"]:
