@@ -16,13 +16,15 @@ When the camera is shown the user's QR code it automatically logs them for that 
 Everything is saved in a data.json file found in your app data folder.
 
 # Compiling
+First enter your src directory by using the command:<br />
+`cd src`<br />
 Within the src folder there will be a file titled `requirments.txt`.<br />
 This lists all required python depencies, to install them on your local machine use the following command:<br />
-`pip install -r ./src/requirements.txt`<br />
+`pip install -r requirements.txt`<br />
 
 I use pyinstaller to make the file into a executable.<br />
 To use it simple run the following command:<br />
-`pyinstaller ./src/Main.spec`<br />
+`pyinstaller Main.spec`<br />
 
 I then use Inno Setup to make it into an easy to install installer.<br />
 
