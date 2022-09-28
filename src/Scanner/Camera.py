@@ -35,15 +35,16 @@ class Camera:
             processedImage = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
             detectedBarcodes = decode(processedImage)
-            if detectedBarcodes and lastDetected > 50:
+            if detectedBarcodes and detectedBarcodes[0].data.decode().isnumeric() and lastDetected > 50:
                 barcode = detectedBarcodes[0]
                 lastDetected = 0
                 value = int(barcode.data)
-                user = self.change_user_attendance(value)
-                if user is not None:
-                    msg = "Welcome " + user + "!"
-                else:
-                    msg = "Invalid User ID: " + str(value)
+                member = self.change_user_attendance(value)
+                msg = "Invalid User ID: " + str(value)
+                if member is not None:
+                    msg = "Welcome " + member["Name"] + "!"
+                    if len(self.signins[member["ID"]]) > 1:
+                        msg = "Bye " + member["Name"] + "!"
                 recognizedFrame = frame.copy()
                 cv2.putText(recognizedFrame, msg, CONSTANT.bottomLeftCornerOfText,
                             CONSTANT.font, CONSTANT.fontScale, CONSTANT.fontColor, CONSTANT.thickness, CONSTANT.lineType)
@@ -69,15 +70,15 @@ class Camera:
 
     def change_user_attendance(self, id_num):
         file_data = read_json()
-        name = None
+        user = None
         for member in file_data["members"]:
             if member["ID"] == id_num:
-                name = member["Name"]
+                user = member
                 if id_num in self.signins:
                     self.signins[id_num].append(datetime.now())
                 else:
                     self.signins[id_num] = [datetime.now()]
-        return name
+        return user
 
     def log_all_attendance(self):
         file_data = read_json()
@@ -85,7 +86,7 @@ class Camera:
             if member["ID"] in self.signins:
                 lastTime = datetime.now()
                 if (len(self.signins[member["ID"]]) > 1):
-                    self.signins[member["ID"]][len(
+                    lastTime = self.signins[member["ID"]][len(
                         self.signins[member["ID"]])-1]
                 duration = lastTime - self.signins[member["ID"]][0]
                 duration_in_s = duration.total_seconds()
