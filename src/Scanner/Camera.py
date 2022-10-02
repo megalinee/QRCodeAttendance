@@ -102,10 +102,10 @@ class Camera:
         write_json(file_data)
 
     def play_log_in_sound(self):
-        playsound(self.resource_path("log_in.wav"))
+        playsound(self.resource_path("log_in.mp3"))
 
     def play_log_out_sound(self):
-        playsound(self.resource_path("log_out.wav"))
+        playsound(self.resource_path("log_out.mp3"))
 
     def resource_path(self, relative_path):
         try:
