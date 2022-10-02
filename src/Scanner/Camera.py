@@ -7,6 +7,7 @@ from playsound import playsound
 import cv2
 import Constants as CONSTANT
 import os
+import time
 import sys
 
 
@@ -28,9 +29,9 @@ class Camera:
         self.add_date()
 
     def start(self):
-        lastDetected = 0
+        prevTime = time.time()
+        waitTime = 1  # Seconds till another code can be scanned from previous
         while True:
-            lastDetected += 1
 
             ret, frame = self.vid.read()
 
@@ -39,9 +40,9 @@ class Camera:
             processedImage = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
             detectedBarcodes = decode(processedImage)
-            if detectedBarcodes and detectedBarcodes[0].data.decode().isnumeric() and lastDetected > 50:
+            if detectedBarcodes and detectedBarcodes[0].data.decode().isnumeric() and time.time()-prevTime > waitTime:
+                prevTime = time.time()
                 barcode = detectedBarcodes[0]
-                lastDetected = 0
                 value = int(barcode.data)
                 member = self.change_user_attendance(value)
                 msg = "Invalid User ID: " + str(value)
