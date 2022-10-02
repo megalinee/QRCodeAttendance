@@ -1,9 +1,13 @@
 from datetime import datetime
-import cv2
-import Constants as CONSTANT
+from threading import Thread
 from pyzbar.pyzbar import decode
 from Tools.JSONTools import read_json, write_json
 from datetime import date
+from playsound import playsound
+import cv2
+import Constants as CONSTANT
+import os
+import sys
 
 
 class Camera:
@@ -43,8 +47,11 @@ class Camera:
                 msg = "Invalid User ID: " + str(value)
                 if member is not None:
                     msg = "Welcome " + member["Name"] + "!"
+                    T = Thread(target=self.play_log_in_sound)
                     if len(self.signins[member["ID"]]) > 1:
                         msg = "Bye " + member["Name"] + "!"
+                        T = Thread(target=self.play_log_out_sound)
+                    T.start()
                 recognizedFrame = frame.copy()
                 cv2.putText(recognizedFrame, msg, CONSTANT.bottomLeftCornerOfText,
                             CONSTANT.font, CONSTANT.fontScale, CONSTANT.fontColor, CONSTANT.thickness, CONSTANT.lineType)
@@ -93,3 +100,17 @@ class Camera:
                 minutes = divmod(duration_in_s, 60)[0]
                 member["days-attended"][self.date_string] = minutes
         write_json(file_data)
+
+    def play_log_in_sound(self):
+        playsound(self.resource_path("log_in.wav"))
+
+    def play_log_out_sound(self):
+        playsound(self.resource_path("log_out.wav"))
+
+    def resource_path(self, relative_path):
+        try:
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath("./Scanner")
+
+        return os.path.join(base_path, relative_path)

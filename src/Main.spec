@@ -10,10 +10,10 @@ block_cipher = None
 
 
 a = Analysis(['Main.py'],
-             pathex=[],
-             binaries=[('./Tools/cardsrc/cardBG.png', '.'), ('./Tools/cardsrc/Montserrat.ttf', '.')],
+             pathex=['.', "../venv/Lib/site-packages"],
+             binaries=[('./Scanner/log_in.wav', '.'), ('./Scanner/log_out.wav', '.'), ('./Tools/cardsrc/cardBG.png', '.'), ('./Tools/cardsrc/Montserrat.ttf', '.')],
              datas=[],
-             hiddenimports=[],
+             hiddenimports=["playsound==1.2.2"],
              hookspath=[],
              hooksconfig={},
              runtime_hooks=[],
