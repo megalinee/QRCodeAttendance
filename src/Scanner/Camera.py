@@ -24,7 +24,7 @@ class Camera:
 
     def start(self):
         prevTime = time.time()
-        waitTime = 1  # Seconds till another code can be scanned from previous
+        waitTime = 1.5  # Seconds till another code can be scanned from previous
         while True:
 
             ret, frame = self.vid.read()
