@@ -63,7 +63,7 @@ class OtherTab(customtkinter.CTkFrame):
                 'JSON File', '*.json')])
         if path != None:
             duplicate_json(path)
-            self.status_label.config(
+            self.status_label.configure(
                 text="Generated file in this directory!")
 
     def reset_json(self):
@@ -71,7 +71,7 @@ class OtherTab(customtkinter.CTkFrame):
             title='Confirmation', message='Are you sure that you want reset the JSON?\nDoing this will delete all saved data unless it was exported.')
         if confirm:
             create_json(CONSTANT.defaultJSON)
-            self.status_label.config(
+            self.status_label.configure(
                 text="Reset JSON file!")
 
     def import_json(self):
@@ -83,5 +83,5 @@ class OtherTab(customtkinter.CTkFrame):
                     'JSON File', '*.json')])
             if path != '':
                 write_json(read_json(filename=path))
-                self.status_label.config(
+                self.status_label.configure(
                     text="Imported JSON file!")

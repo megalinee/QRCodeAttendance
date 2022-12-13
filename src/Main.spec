@@ -12,7 +12,7 @@ block_cipher = None
 a = Analysis(['Main.py'],
              pathex=['.', "../venv/Lib/site-packages"],
              binaries=[('./Scanner/log_in.wav', '.'), ('./Scanner/log_out.wav', '.')],
-             datas=[],
+             datas=[('../venv/Lib/site-packages/customtkinter', 'customtkinter/')],
              hiddenimports=["playsound==1.2.2"],
              hookspath=[],
              hooksconfig={},
