@@ -1,5 +1,7 @@
 import tkinter as tk
+import customtkinter
 import Constants as CONSTANT
+from customtkinter import CTk
 from Tools.JSONTools import create_json
 from tkinter import ttk
 from os.path import exists
@@ -14,22 +16,27 @@ class Main:
         if not exists(CONSTANT.pathToJSON):
             create_json(CONSTANT.defaultJSON)
 
-        root = tk.Tk()
+        customtkinter.set_appearance_mode("dark")
+        customtkinter.set_default_color_theme("dark-blue")
+
+        root = customtkinter.CTk()
         root.title('Admin Dashboard')
         root.geometry(str(CONSTANT.window_x)+"x"+str(CONSTANT.window_y))
         root.resizable(False, False)
 
-        tab_control = ttk.Notebook(root)
+        tab_control = customtkinter.CTkTabview(root)
 
-        manage_members = ManageMembersTab(tab_control)
-        add_members = AddMembersTab(
-            tab_control)
-        other = OtherTab(tab_control)
+        manage_members = tab_control.add("Manage Members")
+        add_members = tab_control.add("Add Members")
+        other = tab_control.add("Other")
 
-        tab_control.add(manage_members, text='Manage Members')
-        tab_control.add(add_members, text='Add Members')
-        tab_control.add(other, text='Other')
-        tab_control.pack(expand=1, fill="both")
+        ManageMembersTab(manage_members, tab_control)
+        AddMembersTab(add_members)
+        OtherTab(other)
+
+        tab_control.set("Manage Members")
+
+        tab_control.pack()
 
         root.mainloop()
 

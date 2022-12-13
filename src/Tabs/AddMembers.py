@@ -1,24 +1,26 @@
 import tkinter as tk
+import customtkinter
 import Constants as CONSTANT
 from Tools.QRTools import text_QR_code
 from tkinter import ttk, Frame, Label, END, Button
 from Tools.JSONTools import read_json, write_json
 
 
-class AddMembersTab(ttk.Frame):
+class AddMembersTab(customtkinter.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
-
-        center = Frame(self, bg='black', width=100, height=200)
+        self.parent = parent
+        center = customtkinter.CTkFrame(
+            parent, width=100, height=200)
 
         center.grid(row=0, sticky="nsew")
 
-        self.ctr_left = Frame(
-            center, bg=CONSTANT.primary_color, width=100, height=190, padx=5)
-        self.ctr_mid = Frame(
-            center, bg=CONSTANT.secondary_color, width=100, height=190, padx=5)
-        self.ctr_right = Frame(
-            center, bg=CONSTANT.secondary_color, width=100, height=190, padx=5)
+        self.ctr_left = customtkinter.CTkFrame(
+            center, width=100, height=190, corner_radius=0)
+        self.ctr_mid = customtkinter.CTkFrame(
+            center, width=100, height=190, corner_radius=0)
+        self.ctr_right = customtkinter.CTkFrame(
+            center, width=100, height=190, corner_radius=0)
         self.ctr_left.grid(row=0, column=0, sticky="ns")
         self.ctr_mid.grid(row=0, column=1, sticky="ns")
         self.ctr_right.grid(row=0, column=2, sticky="ns")
@@ -26,33 +28,45 @@ class AddMembersTab(ttk.Frame):
         self.generate_UI_components()
 
     def generate_UI_components(self):
-        name_label = Label(self.ctr_left, text="Full Name")
-        name_label.pack(pady=(20, 5))
+        name_label = customtkinter.CTkLabel(
+            self.ctr_left, text="Full Name", width=120)
+        name_label.pack(pady=(20, 5), padx=3)
 
         self.full_name_var = tk.StringVar()
-        name_entry = ttk.Entry(self.ctr_left, textvariable=self.full_name_var)
+        name_entry = customtkinter.CTkEntry(
+            self.ctr_left, textvariable=self.full_name_var, width=120)
         name_entry.pack()
         name_entry.focus()
 
-        student_id_label = Label(self.ctr_left, text="Student ID")
+        student_id_label = customtkinter.CTkLabel(
+            self.ctr_left, text="Student ID", width=120)
         student_id_label.pack(pady=(20, 5))
 
         self.student_id_var = tk.StringVar()
-        student_id_entry = ttk.Entry(
-            self.ctr_left, textvariable=self.student_id_var)
+        student_id_entry = customtkinter.CTkEntry(
+            self.ctr_left, textvariable=self.student_id_var, width=120)
         student_id_entry.bind("<Return>", self.submit_user)
         student_id_entry.pack()
         student_id_entry.focus()
 
-        submit_button = Button(
-            self.ctr_left, text='Submit', command=self.submit_user)
-        submit_button.pack(pady=20)
+        submit_button = customtkinter.CTkButton(
+            self.ctr_left, text='Submit', command=self.submit_user, width=100)
+        submit_button.pack(pady=20, padx=0)
 
-        self.qr_display = tk.Text(self.ctr_right, height=15, width=30)
-        self.qr_display.configure(state='disable')
-        self.qr_display.pack(pady=15, padx=(5, 10))
+        self.qr_display = customtkinter.CTkTextbox(
+            self.ctr_right,
+            height=250,
+            width=250,
+            state='disabled',
+            activate_scrollbars=False,
+            fg_color="white",
+            text_color="black",
+            font=("Courier New", 14)
+        )
+        self.qr_display.pack(pady=15, padx=(5, 0))
 
-        self.info_display = tk.Text(self.ctr_mid, height=15, width=20)
+        self.info_display = customtkinter.CTkTextbox(
+            self.ctr_mid, height=250, width=175)
         self.info_display.pack(pady=15, padx=(10, 5))
         self.info_display.insert(tk.END, "")
         self.info_display.configure(state='disable')

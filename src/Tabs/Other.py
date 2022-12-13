@@ -1,4 +1,5 @@
 import tkinter as tk
+import customtkinter
 import threading
 import Constants as CONSTANT
 from tkinter import ttk, Button, Label, filedialog, messagebox, Frame, CENTER
@@ -6,35 +7,40 @@ from Tools.JSONTools import read_json, write_json, json_to_csv, duplicate_json, 
 from Scanner.Camera import Camera
 
 
-class OtherTab(ttk.Frame):
+class OtherTab(customtkinter.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
+        self.parent = parent
+        self.center = customtkinter.CTkFrame(
+            parent, width=CONSTANT.window_x-50, height=CONSTANT.window_y-75)
+
+        self.center.grid(row=0, sticky="nsew")
 
         self.generate_UI_components()
 
     def generate_UI_components(self):
-        start_camera_button = Button(
-            self, text='Start QR Scanner', command=self.start_camera_thread)
+        start_camera_button = customtkinter.CTkButton(
+            self.center, text='Start QR Scanner', command=self.start_camera_thread)
         start_camera_button.place(relx=.5, rely=.2, anchor=CENTER)
 
         # Export Buttons
-        export_csv_button = Button(
-            self, text='Export CSV', command=self.export_csv)
-        export_csv_button.place(relx=.4, rely=.4, anchor=CENTER)
+        export_csv_button = customtkinter.CTkButton(
+            self.center, text='Export CSV', command=self.export_csv)
+        export_csv_button.place(relx=.2, rely=.4, anchor=CENTER)
 
-        export_json_button = Button(
-            self, text='Export JSON', command=self.export_json)
-        export_json_button.place(relx=.4, rely=.6, anchor=CENTER)
+        export_json_button = customtkinter.CTkButton(
+            self.center, text='Export JSON', command=self.export_json)
+        export_json_button.place(relx=.2, rely=.6, anchor=CENTER)
 
-        import_json_button = Button(
-            self, text='Import JSON', command=self.import_json)
-        import_json_button.place(relx=.6, rely=.4, anchor=CENTER)
+        import_json_button = customtkinter.CTkButton(
+            self.center, text='Import JSON', command=self.import_json)
+        import_json_button.place(relx=.8, rely=.4, anchor=CENTER)
 
-        reset_json_button = Button(
-            self, text='Reset JSON', command=self.reset_json)
-        reset_json_button.place(relx=.6, rely=.6, anchor=CENTER)
+        reset_json_button = customtkinter.CTkButton(
+            self.center, text='Reset JSON', command=self.reset_json)
+        reset_json_button.place(relx=.8, rely=.6, anchor=CENTER)
 
-        self.status_label = Label(self, text="")
+        self.status_label = customtkinter.CTkLabel(self.center, text="")
         self.status_label.place(relx=.5, rely=.75, anchor=CENTER)
 
     def start_camera_thread(self):
@@ -48,7 +54,7 @@ class OtherTab(ttk.Frame):
                 'CSV File', '*.csv')])
         if path != None:
             json_to_csv("data.json", path)
-            self.status_label.config(
+            self.status_label.configure(
                 text="Generated file in this directory!")
 
     def export_json(self):

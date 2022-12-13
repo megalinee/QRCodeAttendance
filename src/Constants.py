@@ -1,7 +1,7 @@
 import cv2
 
-window_x = 598
-window_y = 300
+window_x = 600
+window_y = 350
 
 # Color Settings
 primary_color = "#ff5e5e"
