@@ -1,7 +1,7 @@
 import cv2
 
-window_x = 600
-window_y = 340
+window_x = 598
+window_y = 300
 
 # Color Settings
 primary_color = "orange"

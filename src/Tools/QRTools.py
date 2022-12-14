@@ -15,6 +15,16 @@ def resource_path(relative_path):  # To check whether running locally or through
 
     return os.path.join(base_path, relative_path)
 
+
+def text_QR_code(data):
+    qr = qrcode.QRCode()
+    qr.add_data(data)
+    f = io.StringIO()
+    qr.print_ascii(out=f)
+    f.seek(0)
+    return f.read()
+
+
 def generate_ID_card(name, data):
     if not exists("./IDcard"):
         os.mkdir("./IDcard")
