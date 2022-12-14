@@ -1,5 +1,5 @@
 # QR Code Attendance
-QR Code Attendance is a Python-based program that utilizes QR codes and a live webcam scanner to log member's attendance. It offers an intuitive UI for managing members and has various methods of exporting the generated data.
+QR Code Attendance is a program that utilizes QR codes and a live webcam scanner to log member's attendance. It offers an intuitive UI for managing members and has various methods of exporting the generated data.
 
 # Installation
 Download the latest release from this link: <br />
