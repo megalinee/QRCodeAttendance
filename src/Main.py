@@ -7,7 +7,11 @@ from tkinter import ttk
 from os.path import exists
 from Tabs.AddMembers import AddMembersTab
 from Tabs.ManageMembers import ManageMembersTab
+from Tabs.Scanner import ScannerTab
 from Tabs.Other import OtherTab
+
+customtkinter.set_appearance_mode("dark")
+customtkinter.set_default_color_theme("dark-blue")
 
 
 class Main:
@@ -15,9 +19,6 @@ class Main:
         # Checks if JSON exists, if not generates new JSON file
         if not exists(CONSTANT.pathToJSON):
             create_json(CONSTANT.defaultJSON)
-
-        customtkinter.set_appearance_mode("dark")
-        customtkinter.set_default_color_theme("dark-blue")
 
         root = customtkinter.CTk()
         root.title('Admin Dashboard')
@@ -28,10 +29,12 @@ class Main:
 
         manage_members = tab_control.add("Manage Members")
         add_members = tab_control.add("Add Members")
+        scanner = tab_control.add("Scanner")
         other = tab_control.add("Other")
 
         ManageMembersTab(manage_members, tab_control)
         AddMembersTab(add_members)
+        ScannerTab(scanner)
         OtherTab(other)
 
         tab_control.set("Manage Members")

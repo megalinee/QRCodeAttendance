@@ -1,7 +1,8 @@
 import tkinter as tk
+import qrcode
+import PIL
 import customtkinter
 import Constants as CONSTANT
-from Tools.QRTools import text_QR_code
 from tkinter import ttk, Frame, Label, END, Button
 from Tools.JSONTools import read_json, write_json
 
@@ -53,17 +54,16 @@ class AddMembersTab(customtkinter.CTkFrame):
             self.ctr_left, text='Submit', command=self.submit_user, width=100)
         submit_button.pack(pady=20, padx=0)
 
-        self.qr_display = customtkinter.CTkTextbox(
-            self.ctr_right,
-            height=250,
-            width=250,
-            state='disabled',
-            activate_scrollbars=False,
-            fg_color="white",
-            text_color="black",
-            font=("Courier New", 14)
-        )
-        self.qr_display.pack(pady=15, padx=(5, 0))
+        qr_placeholder = PIL.Image.new(mode="RGB", size=(250, 250),
+                                       color=(255, 255, 255))
+        qr_code = customtkinter.CTkImage(light_image=qr_placeholder,
+                                         dark_image=qr_placeholder,
+                                         size=(250, 250))
+        self.qr_display = customtkinter.CTkLabel(self.ctr_right,
+                                                 image=qr_code,
+                                                 fg_color="transparent",
+                                                 text="")
+        self.qr_display.pack(pady=15, padx=(5, 2))
 
         self.info_display = customtkinter.CTkTextbox(
             self.ctr_mid, height=250, width=175)
@@ -88,12 +88,14 @@ class AddMembersTab(customtkinter.CTkFrame):
 
         self.info_display.configure(state='normal')
         self.info_display.delete('1.0', END)
-        self.qr_display.configure(state='normal')
-        self.qr_display.delete('1.0', END)
+
+        qr = qrcode.make(qrcode.make(int(student_id))).copy()
+        qr_code = customtkinter.CTkImage(light_image=qr,
+                                         dark_image=qr,
+                                         size=(250, 250))
+        self.qr_display.configure(image=qr_code)
 
         self.info_display.insert(tk.END, "Successfully added!\nName:\n" + full_name +
                                  "\nID:\n" + student_id)
-        self.qr_display.insert(tk.END, text_QR_code(int(student_id)))
 
         self.info_display.configure(state='disable')
-        self.qr_display.configure(state='disable')

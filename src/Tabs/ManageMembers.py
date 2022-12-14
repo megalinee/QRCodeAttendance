@@ -1,7 +1,8 @@
 import tkinter as tk
+import qrcode
+import PIL
 import customtkinter
 import Constants as CONSTANT
-from Tools.QRTools import text_QR_code
 from tkinter import ttk, Frame, Listbox, END, ANCHOR, Button, StringVar, Entry
 from Tools.JSONTools import read_json, write_json
 
@@ -44,17 +45,16 @@ class ManageMembersTab(customtkinter.CTkFrame):
         self.reload_member_list()
         self.tabcontrol.configure(command=self.reload_member_list)
 
-        self.qr_display = customtkinter.CTkTextbox(
-            self.ctr_right,
-            height=250,
-            width=250,
-            state='disabled',
-            activate_scrollbars=False,
-            fg_color="white",
-            text_color="black",
-            font=("Courier New", 14)
-        )
-        self.qr_display.pack(pady=15, padx=(5, 0))
+        qr_placeholder = PIL.Image.new(mode="RGB", size=(250, 250),
+                                       color=(255, 255, 255))
+        qr_code = customtkinter.CTkImage(light_image=qr_placeholder,
+                                         dark_image=qr_placeholder,
+                                         size=(250, 250))
+        self.qr_display = customtkinter.CTkLabel(self.ctr_right,
+                                                 image=qr_code,
+                                                 fg_color="transparent",
+                                                 text="")
+        self.qr_display.pack(pady=15, padx=(5, 2))
 
         self.info_display = customtkinter.CTkTextbox(
             self.ctr_mid, height=250, width=175)
@@ -73,15 +73,17 @@ class ManageMembersTab(customtkinter.CTkFrame):
                 user = file_data["members"][i]
                 self.info_display.configure(state='normal')
                 self.info_display.delete('1.0', END)
-                self.qr_display.configure(state='normal')
-                self.qr_display.delete('1.0', END)
 
                 # Display ID
                 self.info_display.insert(END, "ID:\n" +
                                          str(user["ID"]))
 
                 # Display QR code
-                self.qr_display.insert(END, text_QR_code(user["ID"]))
+                qr = qrcode.make(user["ID"]).copy()
+                qr_code = customtkinter.CTkImage(light_image=qr,
+                                                 dark_image=qr,
+                                                 size=(250, 250))
+                self.qr_display.configure(image=qr_code)
 
                 # Display Days attended
                 self.info_display.insert(END, "\nDays Attended:\n")
@@ -95,7 +97,6 @@ class ManageMembersTab(customtkinter.CTkFrame):
                     self.info_display.insert(END, "----------")
 
                 self.info_display.configure(state='disable')
-                self.qr_display.configure(state='disable')
                 break
 
     def remove_user(self):
