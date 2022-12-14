@@ -20,6 +20,12 @@ class Camera:
         dateToday = date.today()
         self.date_string = dateToday.strftime("%m-%d-%Y")
 
+        self.meeting_type = "Extra"
+        if dateToday.strftime("%A") == CONSTANT.general_date:
+            self.meeting_type = "General"
+
+        self.date_string = self.date_string + " " + self.meeting_type
+
         self.add_date()
 
     def start(self):
@@ -63,6 +69,7 @@ class Camera:
 
     def add_date(self):
         file_data = read_json()
+
         if len(file_data["members"]) > 0:
             for member in file_data["members"]:
                 if self.date_string not in member["days-attended"]:
@@ -96,10 +103,10 @@ class Camera:
         write_json(file_data)
 
     def play_log_in_sound(self):
-        playsound(self.resource_path("log_in.wav"))
+        playsound(self.resource_path("log_in.mp3"))
 
     def play_log_out_sound(self):
-        playsound(self.resource_path("log_out.wav"))
+        playsound(self.resource_path("log_out.mp3"))
 
     def resource_path(self, relative_path):
         try:

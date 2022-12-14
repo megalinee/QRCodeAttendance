@@ -1,9 +1,12 @@
 import tkinter as tk
 import customtkinter
 import threading
+import webbrowser
 import Constants as CONSTANT
 from tkinter import ttk, Button, Label, filedialog, messagebox, Frame, CENTER
 from Tools.JSONTools import read_json, write_json, json_to_csv, duplicate_json, create_json
+import os
+from Tools.QRTools import generate_ID_card
 
 
 class OtherTab(customtkinter.CTkFrame):
@@ -18,7 +21,6 @@ class OtherTab(customtkinter.CTkFrame):
         self.generate_UI_components()
 
     def generate_UI_components(self):
-
         # Export Buttons
         export_csv_button = customtkinter.CTkButton(
             self.center, text='Export CSV', command=self.export_csv)
@@ -73,6 +75,16 @@ class OtherTab(customtkinter.CTkFrame):
                 'JSON File', '*.json')], defaultextension=[(
                     'JSON File', '*.json')])
             if path != '':
-                write_json(read_json(filename=path))
-                self.status_label.configure(
+                newjson = read_json(filename=path)
+                write_json(newjson)
+                for member in newjson["members"]:
+                    generate_ID_card(member["Name"], member["ID"])
+                self.status_label.config(
                     text="Imported JSON file!")
+
+    def open_folder(self):
+        if(os.path.exists("./IDcard")):
+            webbrowser.open(os.path.abspath("./IDcard"))
+        else:
+            self.status_label.config(
+                text="You must add at least 1 user!")

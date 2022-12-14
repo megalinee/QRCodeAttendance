@@ -3,6 +3,7 @@ import qrcode
 import PIL
 import customtkinter
 import Constants as CONSTANT
+from Tools.QRTools import generate_ID_card
 from tkinter import ttk, Frame, Label, END, Button
 from Tools.JSONTools import read_json, write_json
 
@@ -86,6 +87,9 @@ class AddMembersTab(customtkinter.CTkFrame):
         file_data["member-count"] += 1
         write_json(file_data)
 
+        generate_ID_card(full_name, student_id)
+
+        # Update info boxes
         self.info_display.configure(state='normal')
         self.info_display.delete('1.0', END)
 
