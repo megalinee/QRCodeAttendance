@@ -89,7 +89,7 @@ class AddMembersTab(customtkinter.CTkFrame):
         self.info_display.configure(state='normal')
         self.info_display.delete('1.0', END)
 
-        qr = qrcode.make(qrcode.make(int(student_id))).copy()
+        qr = qrcode.make(int(student_id)).copy()
         qr_code = customtkinter.CTkImage(light_image=qr,
                                          dark_image=qr,
                                          size=(250, 250))
