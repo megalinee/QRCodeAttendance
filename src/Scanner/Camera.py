@@ -2,7 +2,7 @@ from datetime import datetime
 from threading import Thread
 from pyzbar.pyzbar import decode
 from Tools.JSONTools import read_json, write_json
-from datetime import date
+from datetime import date, datetime
 from playsound import playsound
 import cv2
 import Constants as CONSTANT
@@ -12,9 +12,9 @@ import sys
 
 
 class Camera:
-    def __init__(self):
+    def __init__(self, pictureMode="off"):
         self.vid = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-
+        self.pictureMode = pictureMode
         self.signins = {}
 
         dateToday = date.today()
@@ -43,6 +43,8 @@ class Camera:
                 if member is not None:
                     msg = "Welcome " + member["Name"] + "!"
                     T = Thread(target=self.play_log_in_sound)
+                    if self.pictureMode == "on":
+                        cv2.imwrite('./ScanPictures/' + str(value) + "/" +str(datetime.now()) + ".png", frame)
                     if len(self.signins[member["ID"]]) > 1:
                         msg = "Bye " + member["Name"] + "!"
                         T = Thread(target=self.play_log_out_sound)
